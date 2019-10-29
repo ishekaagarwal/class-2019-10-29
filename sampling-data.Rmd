@@ -1,0 +1,37 @@
+---
+title: "class-sampling-data"
+author: "Isheka Agarwal"
+date: "10/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(googlesheets4)
+library(tidyverse)
+```
+
+```{r}
+sheets_deauth()
+x <- read_sheet("1cgP-e6THVfiW5TJ95QhX3jkNxKvc8Sicp9k_BkSRd2I")
+
+y <- x %>%
+  filter(red != "NA") %>%
+  mutate(red_prop = red/(red+white))
+
+#you can also use drop_na() to remove the NAs
+
+```
+
+```{r}
+y %>%
+  ggplot(aes(x = red_prop)) +
+  geom_histogram()
+```
+
+```{r}
+urn <- tibble(bead = c(rep("Red", 2000), rep("White", 8000))) 
+
+```
+
+
